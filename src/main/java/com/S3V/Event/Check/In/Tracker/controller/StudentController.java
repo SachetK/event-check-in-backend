@@ -29,7 +29,7 @@ public class StudentController {
         return studentRepository.findAll();
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/uploads")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
 
