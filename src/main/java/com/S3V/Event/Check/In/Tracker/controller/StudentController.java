@@ -13,7 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://event-check-in-tracker.herokuapp.com")
+//@CrossOrigin(origins = "https://event-check-in-tracker.herokuapp.com")
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/")
 public class StudentController {
