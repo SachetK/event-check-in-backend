@@ -30,6 +30,11 @@ public class StudentController {
         return studentRepository.findAll();
     }
 
+    @DeleteMapping("/people")
+    public void deleteAllPeople() {
+        studentRepository.deleteAll();
+    }
+
     @PostMapping("/uploads")
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
