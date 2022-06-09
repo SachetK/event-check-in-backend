@@ -1,5 +1,6 @@
 package com.S3V.Event.Check.In.Tracker.controller;
 
+import com.S3V.Event.Check.In.Tracker.exception.ResourceNotFoundException;
 import com.S3V.Event.Check.In.Tracker.helper.CSVHelper;
 import com.S3V.Event.Check.In.Tracker.message.ResponseMessage;
 import com.S3V.Event.Check.In.Tracker.model.Student;
@@ -57,12 +58,13 @@ public class StudentController {
 
     @PutMapping("/people/{studentId}")
     public void checkInPerson(@PathVariable long studentId){
-        Student student = studentRepository.findById(studentId).get();
+        Student student = studentRepository.findById(studentId).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + studentId));
         if(student.getChecked().equals(null)){
             student.setChecked(true);
         } else {
             student.setChecked(!student.getChecked());
 
+        studentRepository.save(student);
         }
     }
 }
