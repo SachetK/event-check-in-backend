@@ -59,5 +59,6 @@ public class StudentController {
     public void checkInPerson(@PathVariable long studentId){
         Student student = studentRepository.findById(studentId).get();
         student.setChecked(true);
+        studentRepository.save(student);
     }
 }
