@@ -54,4 +54,15 @@ public class StudentController {
         message = "Please upload a csv file!";
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
+
+    @PutMapping("/people/{studentId}")
+    public void checkInPerson(@PathVariable long studentId){
+        Student student = studentRepository.findById(studentId).get();
+        if(student.getChecked().equals(null)){
+            student.setChecked(true);
+        } else {
+            student.setChecked(!student.getChecked());
+
+        }
+    }
 }
