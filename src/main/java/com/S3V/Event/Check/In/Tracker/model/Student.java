@@ -42,11 +42,14 @@ public class Student {
     @Column(name = "guest_ticket")
     private Integer guestTicket;
 
+    @Column(name = "checked_in")
+    private Boolean checked;
+
     public Student() {
 
     }
 
-    public Student(Integer countyId, Integer guestTicket, String firstName, String lastName, String middleInitial, int ticket, Integer grade, String paymentMethod, String guest) {
+    public Student(Integer countyId, Integer guestTicket, String firstName, String lastName, String middleInitial, int ticket, Integer grade, String paymentMethod, String guest, Boolean checked) {
         this.countyId = countyId;
         this.guestTicket = guestTicket;
         this.firstName = firstName;
@@ -56,6 +59,7 @@ public class Student {
         this.grade = grade;
         this.paymentMethod = paymentMethod;
         this.guest = guest;
+        this.checked = checked;
     }
 
     public long getId() {
@@ -136,5 +140,13 @@ public class Student {
 
     public void setGuestTicket(Integer guestTicket) {
         this.guestTicket = guestTicket;
+    }
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
     }
 }

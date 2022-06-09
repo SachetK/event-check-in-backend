@@ -36,8 +36,8 @@ public class CSVHelper {
                         Integer.parseInt(csvRecord.get("Ticket")),
                         !csvRecord.get("GR").equals("") ? Integer.parseInt(csvRecord.get("GR")) : null,
                         csvRecord.get("Payment Method"),
-                        csvRecord.get("Guest YN")
-                );
+                        csvRecord.get("Guest YN"),
+                        null);
                 students.add(tutorial);
             }
             return students;
