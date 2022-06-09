@@ -59,12 +59,8 @@ public class StudentController {
     @PutMapping("/people/{studentId}")
     public void checkInPerson(@PathVariable long studentId){
         Student student = studentRepository.findById(studentId).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + studentId));
-        if(student.getChecked().equals(null)){
-            student.setChecked(true);
-        } else {
-            student.setChecked(!student.getChecked());
-
+        student.setChecked(true);
         studentRepository.save(student);
-        }
+
     }
 }
