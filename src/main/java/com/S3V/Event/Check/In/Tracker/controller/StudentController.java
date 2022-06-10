@@ -27,7 +27,9 @@ public class StudentController {
     // get all people
     @GetMapping("/people")
     public List<Student> getAllPeople(){
-        return studentRepository.findAll();
+        List<Student> students = studentRepository.findAll();
+        students.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
+        return students;
     }
 
     @DeleteMapping("/people")
@@ -58,7 +60,7 @@ public class StudentController {
     @PutMapping("/people/{studentId}")
     public void checkInPerson(@PathVariable long studentId){
         Student student = studentRepository.findById(studentId).get();
-        student.setChecked(true);
+        student.setChecked(student.getChecked() == null || !student.getChecked());
         studentRepository.save(student);
     }
 }
