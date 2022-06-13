@@ -9,17 +9,17 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/logs")
 public class LogController {
     @Autowired
     LogRepository logRepository;
 
-    @GetMapping("/logs")
+    @GetMapping
     public List<Log> getLogs() {
         return logRepository.findAll();
     }
 
-    @PostMapping("/logs")
+    @PostMapping
     public Log createSubject(@RequestBody Log log) {
         return logRepository.save(log);
     }

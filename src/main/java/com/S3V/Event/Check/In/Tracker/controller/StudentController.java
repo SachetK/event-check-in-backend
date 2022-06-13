@@ -16,7 +16,7 @@ import java.util.List;
 //@CrossOrigin(origins = "https://event-check-in-tracker.herokuapp.com")
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/people")
 public class StudentController {
     @Autowired
     private CSVService fileService;
@@ -24,15 +24,15 @@ public class StudentController {
     @Autowired
     private StudentRepository studentRepository;
 
-    // get all people
-    @GetMapping("/people")
+    // get all peoples
+    @GetMapping
     public List<Student> getAllPeople(){
         List<Student> students = studentRepository.findAll();
         students.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
         return students;
     }
 
-    @DeleteMapping("/people")
+    @DeleteMapping
     public void deleteAllPeople() {
         studentRepository.deleteAll();
     }
@@ -57,7 +57,7 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
-    @PutMapping("/people/{studentId}")
+    @PutMapping("/{studentId}")
     public void checkInPerson(@PathVariable long studentId){
         Student student = studentRepository.findById(studentId).get();
         student.setChecked(student.getChecked() == null || !student.getChecked());
