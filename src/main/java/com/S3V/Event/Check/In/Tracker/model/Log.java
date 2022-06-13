@@ -25,18 +25,13 @@ public class Log {
 
     }
 
-    public Log(long id, String logger, String message) {
-        this.id = id;
+    public Log(String logger, String message) {
         this.logger = logger;
         this.message = message;
     }
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getLogger() {
