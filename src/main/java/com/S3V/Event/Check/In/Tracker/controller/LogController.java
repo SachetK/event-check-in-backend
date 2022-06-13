@@ -19,6 +19,11 @@ public class LogController {
         return logRepository.findAll();
     }
 
+    @DeleteMapping
+    public void deleteAllLogs() {
+        logRepository.deleteAll();
+    }
+
     @PostMapping
     public Log createSubject(@RequestBody Log log) {
         return logRepository.save(log);
