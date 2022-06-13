@@ -1,8 +1,11 @@
 package com.S3V.Event.Check.In.Tracker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "people")
@@ -44,6 +47,10 @@ public class Student {
 
     @Column(name = "checked_in")
     private Boolean checked;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student")
+    private Set<Log> logs;
 
     public Student() {
 
