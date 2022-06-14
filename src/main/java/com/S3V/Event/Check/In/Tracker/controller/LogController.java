@@ -26,7 +26,7 @@ public class LogController {
     @GetMapping
     public List<Log> getLogs() {
         List<Log> logs = logRepository.findAll();
-        logRepository.findAll().sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
+        logs.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
         return logs;
     }
 
