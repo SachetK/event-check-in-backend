@@ -50,7 +50,6 @@ public class CSVHelper {
              CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
             for (Log log : logs) {
                 List<String> data = Arrays.asList(
-                        String.valueOf(log.getId()),
                         log.getLogger(),
                         log.getMessage()
                 );
