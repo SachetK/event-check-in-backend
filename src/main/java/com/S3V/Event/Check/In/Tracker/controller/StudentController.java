@@ -58,9 +58,14 @@ public class StudentController {
     }
 
     @PutMapping("/{studentId}")
-    public void checkInPerson(@PathVariable long studentId){
+    public void checkInPerson(@PathVariable long studentId) {
         Student student = studentRepository.findById(studentId).get();
         student.setChecked(student.getChecked() == null || !student.getChecked());
         studentRepository.save(student);
+    }
+
+    @GetMapping("/{studentId}")
+    public void getPersonById(@PathVariable long studentId) {
+        studentRepository.findById(studentId);
     }
 }
