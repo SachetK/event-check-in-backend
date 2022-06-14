@@ -1,25 +1,23 @@
 package com.S3V.Event.Check.In.Tracker.helper;
 
+import com.S3V.Event.Check.In.Tracker.model.Log;
 import com.S3V.Event.Check.In.Tracker.model.Student;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.lang.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CSVHelper {
-    public static String TYPE = "text/csv";
-    static String[] HEADERS = { "ID", "Guest Ticket Number", "FIRST", "LAST", "MI", "Ticket", "GR", "Payment Method", "Guest YN" };
+    private static String TYPE = "text/csv";
+    private static String[] HEADERS = { "ID", "Guest Ticket Number", "FIRST", "LAST", "MI", "Ticket", "GR", "Payment Method", "Guest YN" };
+
     public static boolean hasCSVFormat(MultipartFile file) {
         return TYPE.equals(file.getContentType());
     }
+
     public static List<Student> csvToStudents(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
@@ -43,6 +41,25 @@ public class CSVHelper {
             return students;
         } catch (IOException e) {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
+        }
+    }
+
+    public static ByteArrayInputStream logsToCSV(List<Log> logs) {
+        final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream();
+             CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
+            for (Log log : logs) {
+                List<String> data = Arrays.asList(
+                        String.valueOf(log.getId()),
+                        log.getLogger(),
+                        log.getMessage()
+                );
+                csvPrinter.printRecord(data);
+            }
+            csvPrinter.flush();
+            return new ByteArrayInputStream(out.toByteArray());
+        } catch (IOException e) {
+            throw new RuntimeException("Fail to import data to CSV file: " + e.getMessage());
         }
     }
 }
