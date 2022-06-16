@@ -3,6 +3,8 @@ package com.S3V.Event.Check.In.Tracker.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+// Model for logs for JPA to create a DB
+
 @Entity
 public class Log {
     @Id

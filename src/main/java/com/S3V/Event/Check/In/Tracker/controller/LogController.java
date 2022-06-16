@@ -24,24 +24,24 @@ public class LogController {
     LogRepository logRepository;
 
     @GetMapping
-    public List<Log> getLogs() {
+    public List<Log> getLogs() { // return sorted list from database (by ID)
         List<Log> logs = logRepository.findAll();
         logs.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
         return logs;
     }
 
     @DeleteMapping
-    public void deleteAllLogs() {
+    public void deleteAllLogs() { // delete database contents
         logRepository.deleteAll();
     }
 
     @PostMapping
-    public Log createSubject(@RequestBody Log log) {
+    public Log createSubject(@RequestBody Log log) { // add new log
         return logRepository.save(log);
     }
 
     @GetMapping("/download")
-    public ResponseEntity<Resource> getFile() {
+    public ResponseEntity<Resource> getFile() { // download as CSV (logs)
         String filename = "logs.csv";
         InputStreamResource file = new InputStreamResource(fileService.load());
         return ResponseEntity.ok()

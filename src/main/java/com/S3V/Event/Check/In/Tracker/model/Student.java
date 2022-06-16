@@ -7,6 +7,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
+// Model for students for JPA to create a table
+
 @Entity
 @Table(name = "people")
 public class Student {

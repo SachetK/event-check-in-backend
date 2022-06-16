@@ -26,18 +26,18 @@ public class StudentController {
 
     // get all peoples
     @GetMapping
-    public List<Student> getAllPeople(){
+    public List<Student> getAllPeople(){ // Return sorted list of people (by ID)
         List<Student> students = studentRepository.findAll();
         students.sort((o1, o2) -> (int) (o1.getId() - o2.getId()));
         return students;
     }
 
     @DeleteMapping
-    public void deleteAllPeople() {
+    public void deleteAllPeople() { // Delete contents of Student Table
         studentRepository.deleteAll();
     }
 
-    @PostMapping("/uploads")
+    @PostMapping("/uploads") // Upload data from CSV
     public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
 
@@ -57,14 +57,14 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
     }
 
-    @PutMapping("/{studentId}")
+    @PutMapping("/{studentId}") // Check in student based on ID
     public void checkInPerson(@PathVariable long studentId) {
         Student student = studentRepository.findById(studentId).get();
         student.setChecked(student.getChecked() == null || !student.getChecked());
         studentRepository.save(student);
     }
 
-    @GetMapping("/{studentId}")
+    @GetMapping("/{studentId}") // Return student based on ID
     public void getPersonById(@PathVariable long studentId) {
         studentRepository.findById(studentId);
     }
